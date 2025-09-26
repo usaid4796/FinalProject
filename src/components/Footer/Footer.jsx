@@ -2,11 +2,10 @@ import React from "react";
 // import footerLogo from "../../assets/logo.png";
 // import Banner from "../../assets/website/footer-pattern.jpg";
 import { FiShoppingBag } from "react-icons/fi";
-import { FaMapLocationDot } from "react-icons/fa6";
+import { FaGithub, FaMapLocationDot } from "react-icons/fa6";
 import {
   FaFacebook,
   FaInstagram,
-  FaLinkedin,
   FaLocationArrow,
   FaMobileAlt,
 } from "react-icons/fa";
@@ -105,18 +104,18 @@ const Footer = () => {
                 <a href="#">
                   <FaFacebook className="text-3xl" />
                 </a>
-                <a href="#">
-                  <FaLinkedin className="text-3xl" />
+                <a href="https://github.com/usaid4796?">
+                  <FaGithub className="text-3xl" />
                 </a>
               </div>
               <div className="mt-6">
                 <div className="flex items-center gap-3">
                   <FaMapLocationDot />
-                  <p>Indore, Madhya Pradesh</p>
+                  <p>Pakistan, Usaid Ahmed</p>
                 </div>
                 <div className="flex items-center gap-3 mt-3">
                   <IoCall />
-                  <p>+91 123456789</p>
+                  <p>+92 3472852633</p>
                 </div>
               </div>
             </div>
