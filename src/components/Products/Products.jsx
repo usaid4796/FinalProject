@@ -1,23 +1,24 @@
 import React from "react";
 import Img1 from "../../assets/women/women.png";
-import Img2 from "../../assets/women/women2.jpg";
+import Img2 from "../../assets/women/women2.avif";
 import Img3 from "../../assets/women/women3.jpg";
 import Img4 from "../../assets/women/women4.jpg";
+import Img0 from "../../assets/women/women0.avif";
 import { FaStar } from "react-icons/fa6";
 
 const ProductsData = [
   {
     id: 1,
     img: Img1,
-    title: "Women Ethnic",
+    title: "Iphone 15 pro-max",
     rating: 5.0,
     color: "white",
     aosDelay: "0",
   },
   {
     id: 2,
-    img: Img2,
-    title: "Women western",
+    img: Img0,
+    title: "Nike Shoes",
     rating: 4.5,
     color: "Red",
     aosDelay: "200",
@@ -25,15 +26,15 @@ const ProductsData = [
   {
     id: 3,
     img: Img3,
-    title: "Goggles",
+    title: "Rolex Watch",
     rating: 4.7,
-    color: "brown",
+    color: "Grey",
     aosDelay: "400",
   },
   {
     id: 4,
     img: Img4,
-    title: "Printed T-Shirt",
+    title: "Rose Perfume",
     rating: 4.4,
     color: "Yellow",
     aosDelay: "600",
@@ -41,9 +42,9 @@ const ProductsData = [
   {
     id: 5,
     img: Img2,
-    title: "Fashin T-Shirt",
+    title: "Pocket Gun",
     rating: 4.5,
-    color: "Pink",
+    color: "Black",
     aosDelay: "800",
   },
 ];
