@@ -5,6 +5,7 @@ import Img3 from "../../assets/women/women3.jpg";
 import Img4 from "../../assets/women/women4.jpg";
 import Img0 from "../../assets/women/women0.avif";
 import { FaStar } from "react-icons/fa6";
+import { Link } from "react-router-dom"; // 👈 import Link
 
 const ProductsData = [
   {
@@ -51,7 +52,7 @@ const ProductsData = [
 
 const Products = () => {
   return (
-    <div className="mt-14 mb-12">
+    <div id="Products" className="mt-14 mb-12">
       <div className="container">
         {/* Header section */}
         <div className="text-center mb-10 max-w-[600px] mx-auto">
@@ -95,9 +96,11 @@ const Products = () => {
           </div>
           {/* view all button */}
           <div className="flex justify-center">
-            <button className="text-center mt-10 cursor-pointer bg-primary text-white py-1 px-5 rounded-md">
-              View All Button
-            </button>
+            <Link to="/all-products">
+              <button className="text-center mt-10 cursor-pointer bg-primary text-white py-1 px-5 rounded-md">
+                View All Products
+              </button>
+            </Link>
           </div>
         </div>
       </div>

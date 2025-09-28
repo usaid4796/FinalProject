@@ -4,13 +4,13 @@ import Slider from "react-slick";
 const TestimonialData = [
   {
     id: 1,
-    name: "Victor",
+    name: "Abrar Ahmed",
     text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
     img: "https://picsum.photos/101/101",
   },
   {
     id: 2,
-    name: "Satya Nadella",
+    name: "Babar Azam",
     text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
     img: "https://picsum.photos/102/102",
   },
@@ -68,7 +68,7 @@ const Testimonials = () => {
   };
 
   return (
-    <div className="py-10 mb-10">
+    <div id="Testimonials" className="py-10 mb-10">
       <div className="container">
         {/* header section */}
         <div className="text-center  mb-10 max-w-[600px] mx-auto">

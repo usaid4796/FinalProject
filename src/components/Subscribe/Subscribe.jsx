@@ -2,12 +2,12 @@ import React from "react";
 
 const Subscribe = () => {
   const handleSubmit = (e) => {
-    e.preventDefault(); // stop React from blocking reload
-    window.location.reload(); // reload the page
+    e.preventDefault(); 
+    window.location.reload(); 
   };
 
   return (
-    <div
+    <div id="ContactUs"
       data-aos="zoom-in"
       className="mb-20 bg-slate-700 dark:bg-gray-800 text-white "
     >
