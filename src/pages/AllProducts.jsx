@@ -9,12 +9,12 @@ const AllProducts = () => {
 
   // Fetch products
   useEffect(() => {
-    axios.get("https://dummyjson.com/products?limit=190")
-
+    axios
+      .get("https://dummyjson.com/products?limit=270")
       .then((res) => setProducts(res.data.products))
       .catch((err) => console.log(err));
   }, []);
-  console.log(products)
+
   // Fetch categories
   useEffect(() => {
     axios
@@ -41,7 +41,7 @@ const AllProducts = () => {
     cat.charAt(0).toUpperCase() + cat.slice(1).replace("-", " ");
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-gray-50 dark:bg-gray-900 dark:text-gray-100 min-h-screen">
       <h1 className="text-3xl font-bold text-center">All Products</h1>
       <p className="mt-2 text-center">Browse all available products.</p>
 
@@ -49,37 +49,32 @@ const AllProducts = () => {
       <div className="flex flex-wrap justify-center gap-2 mt-4">
         <button
           onClick={() => setSelectedCategory("all")}
-          className={`px-4 py-2 rounded ${selectedCategory === "all" ? "bg-blue-500 text-white" : "bg-gray-200"
-            }`}
+          className={`px-4 py-2 rounded transition ${
+            selectedCategory === "all"
+              ? "bg-blue-500 text-white"
+              : "bg-gray-200 dark:bg-gray-700 dark:text-gray-200"
+          }`}
         >
           All
         </button>
-        {/* {categories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setSelectedCategory(cat)}
-            className={`px-4 py-2 rounded ${
-              selectedCategory === cat ? "bg-blue-500 text-white" : "bg-gray-200"
-            }`}
-          >
-            {formatCategory(cat)}
-          </button>
-        ))} */}
+
         {categories.map((cat) => {
           const catName = cat.name || cat; // if object use cat.name, else cat itself
           const catSlug = cat.slug || catName.toLowerCase().replace(/\s+/g, "-");
           return (
             <button
               key={catSlug}
-              className={`px-4 py-2 rounded ${selectedCategory === catSlug ? "bg-blue-500 text-white" : "bg-gray-200"
-                }`}
               onClick={() => setSelectedCategory(catSlug)}
+              className={`px-4 py-2 rounded transition ${
+                selectedCategory === catSlug
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200 dark:bg-gray-700 dark:text-gray-200"
+              }`}
             >
-              {catName.charAt(0).toUpperCase() + catName.slice(1)}
+              {formatCategory(catName)}
             </button>
           );
         })}
-
       </div>
 
       {/* Price Sort */}
@@ -88,7 +83,7 @@ const AllProducts = () => {
         <select
           value={sortOrder}
           onChange={(e) => setSortOrder(e.target.value)}
-          className="border px-2 py-1 rounded"
+          className="border px-2 py-1 rounded bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200"
         >
           <option value="">Select</option>
           <option value="asc">Low to High</option>
@@ -96,23 +91,33 @@ const AllProducts = () => {
         </select>
       </div>
 
-      {/* Products Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
-        {sortedProducts.map((product) => (
-          <div
-            key={product.id}
-            className="border p-4 rounded shadow hover:shadow-lg transition"
-          >
-            <img
-              src={product.thumbnail}
-              alt={product.title}
-              className="w-full h-40 object-cover rounded mb-2"
-            />
-            <h2 className="font-semibold">{product.title}</h2>
-            <p className="text-sm text-gray-500">${product.price}</p>
-          </div>
-        ))}
-      </div>
+     {/* Products Grid */}
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+  {sortedProducts.map((product) => (
+    <div
+      key={product.id}
+      className="border dark:border-gray-700 p-4 rounded shadow hover:shadow-lg dark:shadow-gray-800 transition bg-white dark:bg-gray-800"
+    >
+      <img
+        src={product.thumbnail}
+        alt={product.title}
+        className="w-full h-40 object-cover rounded mb-2"
+      />
+      <h2 className="font-semibold">{product.title}</h2>
+      <p className="text-sm text-gray-500 dark:text-gray-300">
+        ${product.price}
+      </p>
+
+      {/* Cart Button */}
+      <button
+        className="mt-3 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+      >
+        Add to Cart
+      </button>
+    </div>
+  ))}
+</div>
+
     </div>
   );
 };
