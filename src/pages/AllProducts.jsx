@@ -43,7 +43,9 @@ const AllProducts = () => {
   return (
     <div className="p-6 bg-gray-50 dark:bg-gray-900 dark:text-gray-100 min-h-screen">
       <h1 className="text-3xl font-bold text-center">All Products</h1>
-      <p className="mt-2 text-center">Browse all available products.</p>
+      <p className="mt-2 text-center text-gray-600 dark:text-gray-400">
+        Browse and shop the latest products.
+      </p>
 
       {/* Categories */}
       <div className="flex flex-wrap justify-center gap-2 mt-4">
@@ -59,8 +61,8 @@ const AllProducts = () => {
         </button>
 
         {categories.map((cat) => {
-          const catName = cat.name || cat; // if object use cat.name, else cat itself
-          const catSlug = cat.slug || catName.toLowerCase().replace(/\s+/g, "-");
+          const catName = typeof cat === "string" ? cat : cat.name;
+          const catSlug = typeof cat === "string" ? cat : cat.slug;
           return (
             <button
               key={catSlug}
@@ -91,36 +93,47 @@ const AllProducts = () => {
         </select>
       </div>
 
-     {/* Products Grid */}
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
-  {sortedProducts.map((product) => (
-    <div
-      key={product.id}
-      className="border dark:border-gray-700 p-4 rounded shadow hover:shadow-lg dark:shadow-gray-800 transition bg-white dark:bg-gray-800"
-    >
-      <img
-        src={product.thumbnail}
-        alt={product.title}
-        className="w-full h-40 object-cover rounded mb-2"
-      />
-      <h2 className="font-semibold">{product.title}</h2>
-      <p className="text-sm text-gray-500 dark:text-gray-300">
-        ${product.price}
-      </p>
+      {/* Products Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+        {sortedProducts.map((product) => (
+          <div
+            key={product.id}
+            className="border dark:border-gray-700 p-4 rounded shadow hover:shadow-lg dark:shadow-gray-800 transition bg-white dark:bg-gray-800"
+          >
+            <img
+              src={product.thumbnail}
+              alt={product.title}
+              className="w-full h-40 object-cover rounded mb-3"
+            />
+            <h2 className="font-semibold text-lg mb-1">{product.title}</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-300 mb-1">
+              Brand: {product.brand || "N/A"}
+            </p>
+            <p className="text-sm text-gray-500 dark:text-gray-300 mb-1">
+              Category: {product.category}
+            </p>
+            <p className="text-sm text-gray-700 dark:text-gray-400 line-clamp-2">
+              {product.description}
+            </p>
+            <div className="mt-2 flex justify-between items-center">
+              
+              <span className="text-blue-600 dark:text-blue-400 font-medium">
+                ${product.price}
+              </span>
+              <span className="text-sm text-yellow-500">
+                ⭐ {product.rating}
+              </span>
+            </div>
 
-      {/* Cart Button */}
-      <button
-        className="mt-3 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
-      >
-        Add to Cart
-      </button>
-    </div>
-  ))}
-</div>
-
+            {/* Cart Button */}
+            <button className="mt-3 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+              Add to Cart
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
 export default AllProducts;
-
