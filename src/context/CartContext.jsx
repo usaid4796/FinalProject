@@ -1,40 +1,50 @@
-// CartContext.jsx
-import React, { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
+import { useAuth } from "./AuthContext";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+  const { user } = useAuth();
+  const [cartItems, setCartItems] = useState(() => {
+    // Load from localStorage immediately on mount
+    if (typeof window !== "undefined" && user) {
+      return JSON.parse(localStorage.getItem(`cart_${user.email}`)) || [];
+    }
+    return [];
+  });
 
-  const addToCart = (product) => {
-    setCart((prev) => {
-      const existing = prev.find((item) => item.id === product.id);
-      if (existing) {
-        return prev.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
-      return [...prev, { ...product, quantity: 1 }];
-    });
+  useEffect(() => {
+    if (user) {
+      const savedCart = JSON.parse(localStorage.getItem(`cart_${user.email}`)) || [];
+      setCartItems(savedCart);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem(`cart_${user.email}`, JSON.stringify(cartItems));
+    }
+  }, [cartItems, user]);
+
+  const addToCart = (item) => {
+    const updatedCart = [...cartItems, item];
+    setCartItems(updatedCart);
+  };
+
+  const removeFromCart = (id) => {
+    setCartItems(cartItems.filter((i) => i.id !== id));
   };
 
   const updateQuantity = (id, quantity) => {
-    setCart((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item
-      )
+    setCartItems(
+      cartItems.map((i) => (i.id === id ? { ...i, quantity } : i))
     );
   };
 
-  // ✅ remove item
-  const removeFromCart = (id) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
-  };
+  const clearCart = () => setCartItems([]);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, updateQuantity, removeFromCart }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateQuantity, clearCart }}>
       {children}
     </CartContext.Provider>
   );
