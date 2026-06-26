@@ -1,4 +1,3 @@
-import React from "react";
 import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext";
 
@@ -40,7 +39,9 @@ const Wishlist = () => {
                   <span className="text-blue-600 dark:text-blue-400 font-medium text-sm sm:text-base md:text-lg">
                     ${item.price}
                   </span>
-                  <span className="text-sm sm:text-base text-yellow-500">⭐ {item.rating || 0}</span>
+                  <span className="text-sm sm:text-base text-yellow-500">
+                    ⭐ {item.rating || 0}
+                  </span>
                 </div>
 
                 <div className="flex gap-2 mt-3">
